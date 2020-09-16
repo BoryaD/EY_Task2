@@ -1,0 +1,52 @@
+{% extends 'SecondTask/base.html' %}
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+<body>
+    {% block content %}
+
+        {% block content_header %}
+            <h2>{{filename}}</h2>
+        {% endblock %}
+
+        <table border="1">
+            <tr>
+                <td rowspan="2">Б/сч</td>
+                <td colspan="2">ВХОДЯЩЕЕ САЛЬДО</td>
+                <td colspan="2">ОБОРОТЫ</td>
+                <td colspan="2">ИСХОДЯЩЕЕ САЛЬДО</td>
+            </tr>
+            <tr>
+                <td >Актив </td>
+                <td >Пассив </td>
+                <td >Дебет </td>
+                <td >Кредит </td>
+                <td >Актив </td>
+                <td >Пассив </td>
+            </tr>
+
+                {% for str in table %}
+                    {% if str.type_of_str %}
+                        <tr>
+                            <td>{{ str.bill_str }}</td>
+                            <td>{{ str.ib_ac}}</td>
+                            <td>{{ str.ib_pas}}</td>
+                            <td>{{ str.to_deb}}</td>
+                            <td>{{ str.to_cr}}</td>
+                            <td>{{ str.ob_ac}}</td>
+                            <td>{{ str.ob_pas}}</td>
+                        </tr>
+
+                    {% else %}
+                        <tr>
+                            <td colspan="7">{{ str.class_of }}</td>
+                        </tr>
+                    {% endif %}
+
+                {% endfor %}
+
+        </table>
+    {% endblock %}
+</body>
